@@ -1,5 +1,5 @@
 <template>
-  <video ref="videoElem" autoplay></video>
+  <video ref="videoElem" autoplay controls></video>
 </template>
 
 <script>
@@ -7,6 +7,7 @@ import { ref, onMounted, reactive, watch } from "vue";
 import { post, get } from "@/utils/request";
 
 const usePcObjEffect = (rstpUrl, disableAudio) => {
+  const videoElem = ref();
   const pcObj = reactive({
     pc: null,
     sendChannel: null,
@@ -25,8 +26,6 @@ const usePcObjEffect = (rstpUrl, disableAudio) => {
     pcObj.sendChannel = null;
     pcObj.stream = null;
   };
-
-  const videoElem = ref();
 
   // 重置pc
   const pcReload = () => {
@@ -117,6 +116,7 @@ const usePcObjEffect = (rstpUrl, disableAudio) => {
     pcObj.sendChannel.onmessage = (e) => console.log(e);
   };
 
+  // 播放视频
   const playVideo = async () => {
     // 重置
     pcReload();
@@ -197,8 +197,8 @@ export default {
       (newMuted) => {
         // 静音开关
         newMuted === true
-          ? (videoElem.value.muted = 'muted')
-          : (videoElem.value.muted = '');
+          ? (videoElem.value.muted = "muted")
+          : (videoElem.value.muted = "");
       }
     );
 
