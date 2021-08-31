@@ -45,7 +45,7 @@ export default {
         {
           rtspUrl: "rtsp://admin:cebon61332433@192.168.99.215",
           disableAudio: false,
-          play: true,
+          play: false,
           selected: false,
           muted: false,
         },
