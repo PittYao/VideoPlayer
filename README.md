@@ -32,7 +32,7 @@ export default {
           参数说明：
             rtspUrl: 地址
             disableAudio: 硬件设备是否支持音频，编码器不支持=false,摄像头支持=true
-            play: 是否默认播放 [默认播放=true]
+            play: 是否自动播放 [默认播放=true]
             selected: 选中状态 [添加边框]
             muted: 是否静音 [默认不静音=false]
         */

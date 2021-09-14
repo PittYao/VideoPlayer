@@ -1,5 +1,5 @@
 <template>
-  <video ref="videoElem" autoplay controls></video>
+  <video ref="videoElem" autoplay></video>
 </template>
 
 <script>
@@ -148,7 +148,32 @@ const usePcObjEffect = (rstpUrl, disableAudio) => {
     }
   };
 
-  return { playVideo, pcClear, videoElem };
+  // 全屏
+  const fullScreen = () => {
+    const videoElemValue = videoElem.value;
+
+    // 适配各浏览器
+    if (videoElemValue.requestFullscreen) {
+      videoElemValue.requestFullscreen();
+    } else if (videoElemValue.webkitRequestFullscreen) {
+      videoElemValue.webkitRequestFullscreen();
+    } else if (videoElemValue.mozRequestFullScreen) {
+      videoElemValue.mozRequestFullScreen();
+    }
+  };
+
+  // 检测全屏元素
+  const checkFull = () => {
+    var isFull =
+      document.fullscreenElement ||
+      document.mozFullScreenElement ||
+      document.webkitFullscreenElement;
+    //to fix : false || undefined == undefined
+    if (isFull === undefined) isFull = false;
+    return isFull;
+  };
+
+  return { playVideo, pcClear, videoElem, fullScreen, checkFull };
 };
 
 export default {
@@ -167,38 +192,61 @@ export default {
       type: Boolean,
       default: false,
     },
+    full: {
+      type: Boolean,
+      default: false,
+    },
   },
-  setup(props) {
-    const { playVideo, pcClear, videoElem } = usePcObjEffect(
-      props.rtspUrl,
-      props.disableAudio
-    );
+  setup(props, { emit }) {
+    const { playVideo, pcClear, videoElem, fullScreen, checkFull } =
+      usePcObjEffect(props.rtspUrl, props.disableAudio);
 
     onMounted(() => {
       // 起始步骤
       if (props.rtspUrl === "" || props.rtspUrl === undefined) {
         return;
       }
+      // 自动播放
       if (props.play) {
         playVideo();
       }
+
+      // 全屏监听
+      document.addEventListener("fullscreenchange", () => {
+        if (!checkFull()) {
+          console.log("退出全屏");
+          emit("update:full", false);
+        } else {
+          console.log("进入全屏");
+        }
+      });
     });
 
+    // 控制播放关闭
     watch(
       () => props.play,
       (newPlay) => {
-        // 控制播放关闭
         newPlay === true ? playVideo() : pcClear();
       }
     );
 
+    // 静音开关
     watch(
       () => props.muted,
       (newMuted) => {
-        // 静音开关
         newMuted === true
           ? (videoElem.value.muted = "muted")
           : (videoElem.value.muted = "");
+      }
+    );
+
+    // 全屏开关
+    watch(
+      () => props.full,
+      (newFull) => {
+        if (newFull === true) {
+          fullScreen();
+        }
       }
     );
 

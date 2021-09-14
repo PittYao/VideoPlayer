@@ -2,8 +2,8 @@ import axios from 'axios'
 
 // 后台地址
 const instance = axios.create({
-  baseURL: 'http://192.168.99.126:7778',
-  // baseURL: 'http://127.0.0.1:7778',
+  // baseURL: 'http://192.168.99.126:7778',
+  baseURL: 'http://127.0.0.1:7778',
   timeout: 10000
 })
 
