@@ -6,6 +6,7 @@
 - [x] 播放编码器rtsp
 - [x] 开关播放
 - [x] 开关静音控制
+- [x] 全屏
 
 # 文件说明
 - 组件位置: @/components/VideoPlayer.vue
