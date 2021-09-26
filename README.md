@@ -1,5 +1,5 @@
 # 工程介绍
-视频播放
+视频播放 vue3版本
 
 # 功能介绍
 - [x] 播放摄像头rtsp
@@ -35,6 +35,7 @@ export default {
             play: 是否自动播放 [默认播放=true]
             selected: 选中状态 [添加边框]
             muted: 是否静音 [默认不静音=false]
+            full: 是否全屏 [全屏=true]
         */
     	const rtspList = ref([
             	{

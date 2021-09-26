@@ -81,6 +81,7 @@ export default {
     VideoPlayer,
   },
   setup() {
+
     let rtspList = ref([]);
     let selectedList = ref([]);
 
@@ -132,7 +133,6 @@ export default {
         videoElem.selected = !videoElem.selected;
       }
     };
-
 
     return {
       rtspList,
