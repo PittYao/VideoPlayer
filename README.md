@@ -19,7 +19,7 @@
 <video-player
     v-for="(item, index) in rtspList"
     :key="index"
-  :rtspUrl="item.rtspUrl"
+    :rtspUrl="item.rtspUrl"
     :disableAudio="item.disableAudio"
     :play="item.play"
     :muted="item.muted"
