@@ -23,6 +23,7 @@
     :disableAudio="item.disableAudio"
     :play="item.play"
     :muted="item.muted"
+    v-model:full="item.full"
     :class="{ selected: item.selected }"
     @click="selectedVideoElem(index)"
 >
