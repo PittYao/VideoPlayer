@@ -58,4 +58,14 @@ export default {
 
 
 # 启动
-- 控制台 yarn serve  
+- 控制台 yarn serve
+
+# 完整运行
+- 需要配合后端项目 我的另一个仓库 videoplayer_backend
+- 然后在本仓库的utils/request.js中修改后端ip和端口
+```js
+const instance = axios.create({
+  baseURL: 'http://192.168.99.177:7778',
+  timeout: 10000
+})
+```
